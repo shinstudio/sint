@@ -27,6 +27,10 @@ def install(options):
     DEST_LIB_DIR = "/usr/lib/sominst"
     DEST_BIN_DIR = "/usr/bin"
 
+    SOMINST_SYMLINK = os.path.join(DEST_BIN_DIR, "sominst")
+    SOMINST_LIB_DIR = os.path.join(DEST_LIB_DIR, "sominst")
+    SOMINST_FILE = os.path.join(DEST_LIB_DIR, "sominst.py")
+
     BASE_DIR  = os.getcwd() 
     
     # create temp base directory
@@ -46,13 +50,19 @@ def install(options):
                 print e
 
     # check sominst symlink in /usr/bin if exists, remove it
-    if os.path.exists(os.path.join(DEST_BIN_DIR,"sominst")):
-        os.unlink(os.path.join(DEST_BIN_DIR,"sominst"))
+    try:
+        if os.path.exists(SOMINST_SYMLINK):
+            os.unlink(SOMINST_SYMLINK)
+    except IOError:
+        pass
+    #if os.path.exists(SOMINST_SYMLINK):
+    #    print "removing symlink: ", SOMINST_SYMLINK
+    #    os.unlink(os.path.join(DEST_BIN_DIR,"sominst"))
 
     # copy
-    shutil.copytree(os.path.join(BASE_DIR, "sominst"), os.path.join(DEST_LIB_DIR,"sominst"))
-    shutil.copyfile(os.path.join(BASE_DIR, "sominst.py"), os.path.join(DEST_LIB_DIR,"sominst.py"))
-    os.symlink(os.path.join(DEST_LIB_DIR,"sominst.py"), os.path.join(DEST_BIN_DIR,"sominst"))
+    shutil.copytree(os.path.join(BASE_DIR, "sominst"), SOMINST_LIB_DIR)
+    shutil.copy2(os.path.join(BASE_DIR, "sominst.py"), SOMINST_FILE)
+    os.symlink(SOMINST_FILE, SOMINST_SYMLINK)
 
 ################################################################################
 ## execute the program
