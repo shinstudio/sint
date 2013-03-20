@@ -1,4 +1,4 @@
-#! /usr/bin/env python26
+#! /usr/bin/env python
 # Usage
 # {command} : install, create, remove
 # {symlink} : link
