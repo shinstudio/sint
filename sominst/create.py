@@ -73,8 +73,6 @@ def pkg(options):
         
 
     # now remove temp tree
-    shutil.rmtree(BASE_TEMP + '/' + confs['meta']['project'])
-    # now remove temp tree
     # shutil.rmtree(BASE_TEMP + '/' + confs['meta']['project'])
 
     # finalize and close tar file
@@ -86,7 +84,7 @@ def pkg(options):
         print ""
         print "    Installing ---> " + pkg_file_name
         print "-------------------------------------------------------------------"
-        options.pkg = pkg_file_name
+        options.pkg = pkg_file_name + '.tar.gz'
         install.unpkg(options)
     else:
         print ""
