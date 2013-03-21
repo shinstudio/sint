@@ -22,7 +22,8 @@ def main():
     parser = OptionParser()
     parser.add_option("-t", "--type", help='type of package when creating')
     parser.add_option("-p", "--pkg", help='package file name')
-    
+    parser.add_option("-i", action="store_true", dest="install")
+   
     (options, args) = parser.parse_args()
 
     if len(args) > 0:
