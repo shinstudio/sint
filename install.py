@@ -35,16 +35,17 @@ def install(options):
     
     # create temp base directory
     if not os.path.exists(DEST_LIB_DIR):
-        print "############################################################"
-        print "## Destination directory does not exist"
-        print "##   creating ... "
+        print "############################################"
+        print "    Destination directory does not exist"
+        print "   creating ... "
         print DEST_LIB_DIR
         os.makedirs(DEST_LIB_DIR)
 
     # directory exist already, so clean files first
     if os.path.exists(DEST_LIB_DIR):
-        print "############################################################"
-        print "## Cleaning old files"
+        print "############################################"
+        print "    Cleaning old files"
+        print ""
         for the_file in os.listdir(DEST_LIB_DIR):
             file_path = os.path.join(DEST_LIB_DIR, the_file)
             try:
@@ -57,9 +58,10 @@ def install(options):
 
     # check sominst symlink in /usr/bin if exists, remove it
     try:
-        if os.path.exists(SOMINST_SYMLINK):
-            print "###########################################################"
-            print "## Removing old file /usr/bin/symlink"
+        if os.path.lexists(SOMINST_SYMLINK):
+            print "############################################"
+            print "    Removing old file /usr/bin/symlink"
+            print ""
             os.unlink(SOMINST_SYMLINK)
     except IOError:
         pass
@@ -72,9 +74,9 @@ def install(options):
     shutil.copy2(os.path.join(BASE_DIR, "sominst.py"), SOMINST_FILE)
     os.symlink(SOMINST_FILE, SOMINST_SYMLINK)
 
-    print "####################################################################"
+    print "############################################"
     print "### sominst was successfully installed"
-    print "####################################################################"
+    print "############################################"
 ################################################################################
 ## execute the program
 ################################################################################

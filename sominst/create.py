@@ -5,6 +5,7 @@ import shutil
 import tarfile
 import time
 import fnmatch
+import install
 
 ###############################################################################
 ## Variables
