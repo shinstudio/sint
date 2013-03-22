@@ -48,7 +48,7 @@ def pkg(options):
             shutil.copy(file, build_dst + "/" + file)
             tar.add(build_dst + "/" + file, 'sicf/' +  file)
 
-    # now jump to the temp directory to create sub directories based on sicf
+    # jump to the temp directory to create sub directories based on sicf
     os.chdir(dst_root) 
 
     for dir in confs['dir']:
@@ -56,9 +56,8 @@ def pkg(options):
             os.makedirs(dst_root + dir[4])
             tar.add(dst_root + dir[4], dir[4])
 
-    # now copy files to the temp directory by grabing files in a specified directory
+    # copy files to the temp directory by grabing files in a specified directory
     for dir in confs['find']:
-        # create a symlink
         copy_tree(
             src_root + dir[4],
             dst_root + dir[5],
@@ -67,8 +66,15 @@ def pkg(options):
         )
         tar.add(dst_root + dir[5], dir[5])
     os.chdir(cur_dir)
-     
 
+    # copy individual file to the teamp directory in a specified directory
+    for dir in confs['file'];
+        shutil.copy2(
+            src_root + dir[4],
+            dst_root + dir[5]
+        )
+        tar.add(dst_root + dir[5], dir[5])
+    os.chdir(cur_dir)
     #for file in confs['files']:
         
 
