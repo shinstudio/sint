@@ -68,7 +68,7 @@ def pkg(options):
     os.chdir(cur_dir)
 
     # copy individual file to the teamp directory in a specified directory
-    for dir in confs['file'];
+    for dir in confs['file']:
         shutil.copy2(
             src_root + dir[4],
             dst_root + dir[5]
@@ -79,7 +79,8 @@ def pkg(options):
         
 
     # now remove temp tree
-    # shutil.rmtree(BASE_TEMP + '/' + confs['meta']['project'])
+    if os.path.isdir(BASE_TEMP + '/' + confs['meta']['project']):
+        shutil.rmtree(BASE_TEMP + '/' + confs['meta']['project'])
 
     # finalize and close tar file
     tar.close()
